@@ -1,0 +1,78 @@
+[submodule "config/vim/pack/minpac/opt/minpac"]
+	path = config/vim/pack/minpac/opt/minpac
+	url = git@github.com:k-takata/minpac.git
+[submodule "config/vim/pack/minpac/start/auto-pairs"]
+	path = config/vim/pack/minpac/start/auto-pairs
+	url = git@github.com:jiangmiao/auto-pairs.git
+[submodule "config/vim/pack/minpac/start/vim-characterize"]
+	path = config/vim/pack/minpac/start/vim-characterize
+	url = git@github.com:tpope/vim-characterize.git
+[submodule "config/vim/pack/minpac/start/vim-commentary"]
+	path = config/vim/pack/minpac/start/vim-commentary
+	url = git@github.com:tpope/vim-commentary.git
+[submodule "config/vim/pack/minpac/start/vim-dispatch"]
+	path = config/vim/pack/minpac/start/vim-dispatch
+	url = git@github.com:tpope/vim-dispatch.git
+[submodule "config/vim/pack/minpac/start/vim-eunuch"]
+	path = config/vim/pack/minpac/start/vim-eunuch
+	url = git@github.com:tpope/vim-eunuch.git
+[submodule "config/vim/pack/minpac/start/vim-fugitive"]
+	path = config/vim/pack/minpac/start/vim-fugitive
+	url = git@github.com:tpope/vim-fugitive.git
+[submodule "config/vim/pack/minpac/start/vim-gutentags"]
+	path = config/vim/pack/minpac/start/vim-gutentags
+	url = git@github.com:ludovicchabant/vim-gutentags.git
+[submodule "config/vim/pack/minpac/start/vim-addon-mw-utils"]
+	path = config/vim/pack/minpac/start/vim-addon-mw-utils
+	url = git@github.com:MarcWeber/vim-addon-mw-utils.git
+[submodule "config/vim/pack/minpac/start/vim-polyglot"]
+	path = config/vim/pack/minpac/opt/vim-polyglot
+	url = git@github.com:sheerun/vim-polyglot.git
+[submodule "config/vim/pack/minpac/start/vim-qf"]
+	path = config/vim/pack/minpac/start/vim-qf
+	url = git@github.com:romainl/vim-qf.git
+[submodule "config/vim/pack/minpac/start/vim-qlist"]
+	path = config/vim/pack/minpac/start/vim-qlist
+	url = git@github.com:romainl/vim-qlist.git
+[submodule "config/vim/pack/minpac/start/vim-repeat"]
+	path = config/vim/pack/minpac/start/vim-repeat
+	url = git@github.com:tpope/vim-repeat.git
+[submodule "config/vim/pack/minpac/start/vim-rsi"]
+	path = config/vim/pack/minpac/start/vim-rsi
+	url = git@github.com:tpope/vim-rsi.git
+[submodule "config/vim/pack/minpac/start/vim-sensible"]
+	path = config/vim/pack/minpac/start/vim-sensible
+	url = git@github.com:tpope/vim-sensible.git
+[submodule "config/vim/pack/minpac/start/vim-sneak"]
+	path = config/vim/pack/minpac/start/vim-sneak
+	url = git@github.com:justinmk/vim-sneak.git
+[submodule "config/vim/pack/minpac/start/vim-surround"]
+	path = config/vim/pack/minpac/start/vim-surround
+	url = git@github.com:tpope/vim-surround.git
+[submodule "config/vim/pack/minpac/start/targets.vim"]
+	path = config/vim/pack/minpac/start/targets.vim
+	url = git@github.com:wellle/targets.vim.git
+[submodule "config/vim/pack/minpac/start/tlib_vim"]
+	path = config/vim/pack/minpac/start/tlib_vim
+	url = git@github.com:tomtom/tlib_vim.git
+[submodule "config/vim/pack/minpac/start/tmux-complete.vim"]
+	path = config/vim/pack/minpac/start/tmux-complete.vim
+	url = git@github.com:wellle/tmux-complete.vim.git
+[submodule "config/vim/pack/minpac/start/ttags_vim"]
+	path = config/vim/pack/minpac/start/ttags_vim
+	url = git@github.com:tomtom/ttags_vim.git
+[submodule "config/vim/pack/minpac/start/undotree"]
+	path = config/vim/pack/minpac/start/undotree
+	url = git@github.com:mbbill/undotree.git
+[submodule "config/vim/pack/minpac/start/vim-unimpaired"]
+	path = config/vim/pack/minpac/start/vim-unimpaired
+	url = git@github.com:tpope/vim-unimpaired.git
+[submodule "config/vim/pack/minpac/start/vimux"]
+	path = config/vim/pack/minpac/start/vimux
+	url = git@github.com:benmills/vimux.git
+[submodule "config/vim/pack/minpac/start/vim-autoformat"]
+	path = config/vim/pack/minpac/start/vim-autoformat
+	url = git@github.com:Chiel92/vim-autoformat.git
+[submodule "config/vim/pack/minpac/start/vim-go"]
+	path = config/vim/pack/minpac/opt/vim-go
+	url = git@github.com:fatih/vim-go.git

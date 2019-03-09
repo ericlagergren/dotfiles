@@ -1,1 +1,4 @@
-ps1
+bin/*
+*.o
+cache/*
+!.gitkeep

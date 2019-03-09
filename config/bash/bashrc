@@ -13,6 +13,9 @@ export HISTFILE=~/.bash_sessions/.bash_history_${ITERM_SESSION_ID%:*}
 ### SET PATHS AND EDITORS AND SUCH ###
 ######################################
 
+export XDG_CONFIG_HOME="${HOME}/dotfiles/config"
+export XDG_CACHE_HOME="${HOME}/dotfiles/cache"
+
 # homebrew
 export HOMEBREW_NO_INSECURE_REDIRECT=1
 export HOMEBREW_CASK_OPTS=--require-sha
@@ -24,6 +27,7 @@ export GOBIN="${GOPATH}/bin"
 export GO111MODULE=on
 
 # Editors and such.
+export VIMINIT="source ${XDG_CONFIG_HOME}/vim/vimrc"
 export EDITOR="$(which vim)"
 export TEX_PATH=/Library/TeX/texbin
 export MYSQL_BIN=/usr/local/mysql/bin
@@ -62,7 +66,7 @@ export TERM=xterm-256color
 export LSCOLORS=gxBxhxDxfxhxhxhxhxcxcx
 
 function prompt {
-	PS1=$("${HOME}/dotfiles/ps1" $? "${SHLVL}", "${SSH_TTY}")
+	PS1=$("${HOME}/dotfiles/bin/prompt" $? "${SHLVL}", "${SSH_TTY}")
 }
 
 PROMPT_DIRTRIM=3

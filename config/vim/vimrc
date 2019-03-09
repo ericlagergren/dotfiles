@@ -1,9 +1,45 @@
 set encoding=utf-8
 scriptencoding utf-8
 
+if &compatible
+	set nocompatible
+endif
+
+set packpath^=$XDG_CONFIG_HOME/vim
 packadd minpac
 call minpac#init()
+
 call minpac#add('k-takata/minpac', {'type': 'opt'})
+call minpac#add('fatih/vim-go"', {'type': 'opt'})
+call minpac#add('sheerun/vim-polyglot"', {'type': 'opt'})
+call minpac#add('jiangmiao/auto-pairs"')
+call minpac#add('tpope/vim-characterize"')
+call minpac#add('tpope/vim-commentary"')
+call minpac#add('tpope/vim-dispatch"')
+call minpac#add('tpope/vim-eunuch"')
+call minpac#add('tpope/vim-fugitive"')
+call minpac#add('ludovicchabant/vim-gutentags"')
+call minpac#add('MarcWeber/vim-addon-mw-utils"')
+call minpac#add('romainl/vim-qf"')
+call minpac#add('romainl/vim-qlist"')
+call minpac#add('tpope/vim-repeat"')
+call minpac#add('tpope/vim-rsi"')
+call minpac#add('tpope/vim-sensible"')
+call minpac#add('justinmk/vim-sneak"')
+call minpac#add('tpope/vim-surround"')
+call minpac#add('wellle/targets.vim"')
+call minpac#add('tomtom/tlib_vim"')
+call minpac#add('wellle/tmux-complete.vim"')
+call minpac#add('tomtom/ttags_vim"')
+call minpac#add('mbbill/undotree"')
+call minpac#add('tpope/vim-unimpaired"')
+call minpac#add('benmills/vimux"')
+call minpac#add('Chiel92/vim-autoformat"')
+
+packadd vim-go
+packadd vim-polyglot
+
+set runtimepath+=$XDG_CONFIG_HOME/vim
 
 filetype off
 syntax on
@@ -56,7 +92,9 @@ set incsearch
 set infercase
 set linebreak
 set linespace=0
+set nobackup
 set noexpandtab
+set noerrorbells
 set nowrap
 set number
 set numberwidth=3
@@ -71,7 +109,8 @@ set shiftwidth=4
 set showcmd
 set statusline=[%{getcwd()}][%f]%=%r%y[%P][col:%c]%{gutentags#statusline()}%{fugitive#statusline()}
 set tabstop=4 " real tabs are 4 chars
-set tags=./.tags,tags;
+set tags=./tags,tags
+set title
 set ttimeoutlen=10
 set ttimeout
 set ttyfast
@@ -82,15 +121,14 @@ set updatetime=100
 " remember up to 10000 lines in each register
 " remember up to 1MB in each register
 " remember last 1000 search patterns remember last 1000 commands
-set viminfo=!,h,'500,<10000,s1000,/1000,:1000
+set viminfo=!,h,'500,<10000,s1000,/1000,:1000,n$XDG_CACHE_HOME/vim/viminfo
+set visualbell
+set wildignore=*.swp,*.bak,*.pyc,*.class,*.o,*.png,*.jpeg,*.jpg
 
-" Clipboard
-set backup
-set backupdir=~/.vim/backup/
-set directory=~/.vim/temp/
-set undodir=~/.vim/undo/
-set undofile " persistent undo
-set undolevels=1000 " persistent undo
+set directory=$XDG_CACHE_HOME/vim/temp,~/.cache/vim/temp,/tmp/vim/temp
+set undodir=$XDG_CACHE_HOME/vim/undo,~/.cache/vim/temp,/undo/vim/temp
+set undofile         " persistent undo
+set undolevels=1000  " persistent undo
 set undoreload=10000 " to undo forced reload with :e
 
 " Mice!
@@ -175,7 +213,7 @@ let g:gutentags_ctags_exclude = [
 	\ "*.min.js", "*.min.css", "build",
 	\ "vendor", ".git", "node_modules",
 	\ "*.vim/pack/*"]
-let g:gutentags_cache_dir = $HOME . '/.vim/tags'
+let g:gutentags_cache_dir = $XDG_CACHE_HOME . '/vim/tags'
 
 " polyglot
 let g:polyglot_disabled = ['go', 'graphql', 'gql']
