@@ -80,5 +80,5 @@
 	path = config/vim/pack/minpac/opt/vim-polyglot
 	url = git@github.com:sheerun/vim-polyglot.git
 [submodule "config/vim/pack/minpac/opt/vim-go"]
-	path = config/vim/pack/minpac/opt/vim-go
+	path = config/vim/pack/minpac/start/vim-go
 	url = git@github.com:fatih/vim-go.git
