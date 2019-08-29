@@ -27,7 +27,7 @@ export GOBIN="${GOPATH}/bin"
 export GO111MODULE=on
 
 # Editors and such.
-export VIMINIT="source ${XDG_CONFIG_HOME}/vim/vimrc"
+export VIMINIT='let $MYVIMRC="$XDG_CONFIG_HOME/vim/vimrc" | source $MYVIMRC'
 export EDITOR="$(which vim)"
 export TEX_PATH=/Library/TeX/texbin
 export MYSQL_BIN=/usr/local/mysql/bin
