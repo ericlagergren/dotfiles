@@ -15,15 +15,13 @@ syntax on
 syntax sync minlines=100
 filetype plugin indent on
 
-" AutoSplit calls vsplit then switches to the rightmost pane, so long as the
-" b:noAutoSplit variable does not exist.
 fun! AutoSplit()
 	if !exists('b:noAutoSplit')
-		vsplit
+		88vsplit
 		wincmd w
 	endif
 endfun
-autocmd FileType gitcommit,noexit,none,text,markdown let b:noAutoSplit=1
+autocmd FileType gitcommit,noexit,none,text,markdown,log,gzip,conf let b:noAutoSplit=1
 autocmd VimEnter * call AutoSplit()
 
 " Mappings
@@ -180,24 +178,30 @@ if exists('*minpac#init')
 	let g:go_doc_url = "http://localhost:9292"
 	let g:go_fmt_autosave = 1
 	let g:go_fmt_command = "goimports"
+	let g:go_fmt_options = {
+		\ 'gofmt': '-s',
+		\ }
 	let g:go_highlight_generate_tags = 1
 	let g:go_template_file = "minimal.go"
 	let g:go_template_use_pkg = 1
 	let g:go_textobj_include_function_doc = 1
 	let g:go_updatetime = 200
+	let g:go_metalinter_enabled = ['staticcheck']
 
-	au FileType go nmap <leader>u <Plug>(go-run)
-	au FileType go nmap <leader>b <Plug>(go-build)
-	au FileType go nmap <leader>i <Plug>(go-info)
-	au FileType go nmap <leader>g <Plug>(go-generate)
-	au FileType go nmap <leader>t <Plug>(go-test)
-	au FileType go nmap <leader>v <Plug>(go-vet)
-	au FileType go nmap <leader>d <Plug>(go-def)
-	au FileType go nmap <leader>c <Plug>(go-def-stack-clear)
-	au FileType go nmap <leader>s <Plug>(go-def-stack)
-	au FileType go nmap <leader>r <Plug>(go-rename)
-	au FileType go nmap <leader>l <Plug>(go-lint)
-	au FileType go nmap <Leader>i <Plug>(go-info)
+	au FileType go nmap <leader>b   <Plug>(go-build)
+	au FileType go nmap <leader>ca  <Plug>(go-callers)
+	au FileType go nmap <leader>d   <Plug>(go-def)
+	au FileType go nmap <leader>s   <Plug>(go-def-stack)
+	au FileType go nmap <leader>c   <Plug>(go-def-stack-clear)
+	au FileType go nmap <leader>ds  <Plug>(go-doc-split)
+	au FileType go nmap <leader>gen <Plug>(go-generate)
+	au FileType go nmap <leader>pl  <Plug>(go-implements)
+	au FileType go nmap <leader>i   <Plug>(go-info)
+	au FileType go nmap <leader>l   <Plug>(go-metalinter)
+	au FileType go nmap <leader>r   <Plug>(go-rename)
+	au FileType go nmap <leader>u   <Plug>(go-run)
+	au FileType go nmap <leader>t   <Plug>(go-test)
+	au FileType go nmap <leader>v   <Plug>(go-vet)
 
 	" AutoFormatSpecificFiles runs :Autoformat if the variable b:noAutoFormat does
 	" not exist.
@@ -208,7 +212,7 @@ if exists('*minpac#init')
 	endfun
 
 	autocmd BufWrite * call AutoFormatSpecificFiles()
-	autocmd FileType markdown let b:noAutoFormat=1
+	autocmd FileType markdown,go let b:noAutoFormat=1
 
 	let g:autoformat_verbosemode = 0
 
