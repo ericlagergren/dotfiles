@@ -165,25 +165,6 @@ function cd {
 
 function ed { command ed -p\* "$@" ; }
 
-function share {
-	if [[ -z "${1}" ]]; then
-		echo "parameter required"
-		return 0
-	fi
-
-	if [[ -z "${SHARE_BACKEND}" ]]; then
-		echo "SHARE_BACKEND unset or empty"
-		return 0
-	fi
-
-	open \
-		-a 'SpiderOak Share.app' \
-		-n \
-		--args \
-		--ignore-locking \
-		--data-folder-name "${1}"
-}
-
 function gitcmd {
 	if [[ "${2}" != "commit" ]]; then
 		git "${@}"
