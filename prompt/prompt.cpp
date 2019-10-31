@@ -1,6 +1,9 @@
+#include <cstring>
 #include <git2.h>
 #include <iostream>
+#include <limits.h>
 #include <string>
+#include <unistd.h>
 
 #ifdef DEBUG
 bool check(int err, const char *message, const char *extra) {
@@ -22,10 +25,7 @@ bool check(int err, const char *message, const char *extra) {
 	return true;
 }
 
-template <size_t N>
-constexpr size_t length(char const (&)[N]) {
-	return N - 1;
-}
+template <size_t N> constexpr size_t length(char const (&)[N]) { return N - 1; }
 
 void set_string(std::string &str, unsigned int flags) {
 	if (flags == GIT_STATUS_CURRENT) {
@@ -106,16 +106,16 @@ int status_cb(const char *path, unsigned int flags, void *payload) {
 		return 1;
 	}
 
-	const auto dirty = GIT_STATUS_WT_MODIFIED | GIT_STATUS_WT_NEW
-	                   | GIT_STATUS_WT_DELETED | GIT_STATUS_WT_TYPECHANGE
-	                   | GIT_STATUS_WT_RENAMED;
+	const auto dirty = GIT_STATUS_WT_MODIFIED | GIT_STATUS_WT_NEW |
+	                   GIT_STATUS_WT_DELETED | GIT_STATUS_WT_TYPECHANGE |
+	                   GIT_STATUS_WT_RENAMED;
 	if ((flags & dirty) != 0) {
 		*s = DIRTY;
 		return 1;
 	}
 
-	const auto added = GIT_STATUS_INDEX_NEW | GIT_STATUS_INDEX_MODIFIED
-	                   | GIT_STATUS_INDEX_DELETED | GIT_STATUS_INDEX_TYPECHANGE;
+	const auto added = GIT_STATUS_INDEX_NEW | GIT_STATUS_INDEX_MODIFIED |
+	                   GIT_STATUS_INDEX_DELETED | GIT_STATUS_INDEX_TYPECHANGE;
 	if ((flags & added) != 0) {
 		*s |= ADDED;
 		return 0;
@@ -125,10 +125,7 @@ int status_cb(const char *path, unsigned int flags, void *payload) {
 
 #define COLOR(x) "\\[\x1b[" x "\\]"
 
-template <typename T>
-void append(std::string &buf, T &&t) {
-	buf += t;
-}
+template <typename T> void append(std::string &buf, T &&t) { buf += t; }
 template <typename T, typename... Ts>
 void append(std::string &buf, T &&t, Ts &&... ts) {
 	buf += t;
@@ -143,11 +140,11 @@ void append(std::string &buf, T &&t, Ts &&... ts) {
 		buf += COLOR("0m");                                                    \
 	}
 
-MAKE_COLOR(red, "31m");
-MAKE_COLOR(green, "32m");
-MAKE_COLOR(yellow, "33m");
-MAKE_COLOR(white, "37m");
-MAKE_COLOR(blue, "38;5;153m");
+MAKE_COLOR(red, "31m")
+MAKE_COLOR(green, "32m")
+MAKE_COLOR(yellow, "33m")
+MAKE_COLOR(white, "37m")
+MAKE_COLOR(blue, "38;5;153m")
 
 void handle_git(std::string &buf) {
 	git_reference *    ref = nullptr;
@@ -184,8 +181,8 @@ void handle_git(std::string &buf) {
 		goto cleanup;
 	}
 	opts.show = GIT_STATUS_SHOW_INDEX_AND_WORKDIR;
-	opts.flags
-	    = GIT_STATUS_OPT_INCLUDE_UNTRACKED | GIT_STATUS_OPT_EXCLUDE_SUBMODULES;
+	opts.flags =
+	    GIT_STATUS_OPT_INCLUDE_UNTRACKED | GIT_STATUS_OPT_EXCLUDE_SUBMODULES;
 
 	git_status_foreach_ext(repo, &opts, status_cb, &flags);
 	if (flags & CONFLICT) {
@@ -235,7 +232,33 @@ int main(int argc, const char **argv) {
 	}
 
 	if (EXISTS(SSH_TTY)) {
-		append_white(buf, "@", std::getenv("HOSTNAME"));
+		auto user = std::getenv("LOGNAME");
+		if (user) {
+			append_blue(buf, user);
+		} else {
+			append_blue(buf, "???");
+		}
+
+		append_white(buf, "@");
+
+#ifndef HOST_NAME_MAX
+#if defined(_POSIX_HOST_NAME_MAX)
+#define HOST_NAME_MAX _POSIX_HOST_NAME_MAX
+#elif defined(MAXHOSTNAMELEN)
+#define HOST_NAME_MAX MAXHOSTNAMELEN
+#endif
+#endif /* HOST_NAME_MAX */
+
+		char name[HOST_NAME_MAX];
+		name[HOST_NAME_MAX - 1] = '\0';
+		if (gethostname(name, HOST_NAME_MAX - 1)) {
+			append_blue(buf, "??? ");
+		} else {
+			if (name[HOST_NAME_MAX - 1] != '\0') {
+				strncpy(name + HOST_NAME_MAX - 4, "...\0", 4);
+			}
+			append_blue(buf, name, " ");
+		}
 	}
 	append_white(buf, "\\w ");
 

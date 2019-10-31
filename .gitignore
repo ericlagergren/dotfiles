@@ -3,3 +3,4 @@ bin/*
 cache/*
 !.gitkeep
 config/vim/.netrwhist
+config/configstore

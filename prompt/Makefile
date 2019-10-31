@@ -1,5 +1,5 @@
 CC=g++
-CFLAGS=-std=c++17 -O3 -Wall -Werror -Wextra -pedantic \
+CFLAGS=-std=c++17 -O2 -Wall -Werror -Wextra -pedantic \
 	   $(shell pkg-config --cflags libgit2)
 LDFLAGS=$(shell pkg-config --libs libgit2)
 TARGET=prompt
@@ -14,7 +14,7 @@ OBJECT=$(TARGET).o
 $(OBJECT): $(TARGET).cpp
 	$(CC) $(CFLAGS) -c -o $@ $<
 $(TARGET): $(OBJECT)
-	$(CC) $(LDFLAGS) $^ -o $@
+	$(CC) $^ -o $@ $(LDFLAGS)
 
 install: $(TARGET)
 	mkdir -p $(DEST)/bin

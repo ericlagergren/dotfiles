@@ -235,3 +235,4 @@ alias nents='ls -1 | wc -l | sed "s#[[:space:]]##g"'
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 
 eval "$(direnv hook bash)"
+export BASH_SILENCE_DEPRECATION_WARNING=1
