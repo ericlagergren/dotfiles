@@ -3,7 +3,7 @@ CFLAGS=-std=c++17 -O2 -Wall -Werror -Wextra -pedantic \
 	   $(shell pkg-config --cflags libgit2)
 LDFLAGS=$(shell pkg-config --libs libgit2)
 TARGET=prompt
-DEST=$(HOME)/dotfiles
+DEST=$(HOME)/.local/bin
 
 .PHONY: all install clean
 
@@ -17,8 +17,8 @@ $(TARGET): $(OBJECT)
 	$(CC) $^ -o $@ $(LDFLAGS)
 
 install: $(TARGET)
-	mkdir -p $(DEST)/bin
-	cp $< $(DEST)/bin/prompt
+	mkdir -p $(DEST)
+	cp $< $(DEST)/prompt
 
 clean:
 	$(RM) *~ *.o $(TARGET)
