@@ -1,4 +1,5 @@
 export GPG_TTY=$(tty)
+export GNUPGHOME="${XDG_DATA_HOME}/gnupg"
 
 gpg-connect-agent /bye
 gpg-connect-agent updatestartuptty /bye > /dev/null

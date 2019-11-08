@@ -41,9 +41,18 @@ shopt -s shift_verbose
 # Don't search $PATH to find files for the `source` builtin
 shopt -u sourcepath
 
-export XDG_CONFIG_HOME="${HOME}/.config"
-export XDG_CACHE_HOME="${HOME}/.cache"
+if [[ "${OSTYPE}" == "darwin"* ]]; then
+	export XDG_CACHE_HOME="${HOME}/Library/Caches"
+	export XDG_CONFIG_HOME="${HOME}/Library/Application Support"
+else
+	export XDG_CACHE_HOME="${HOME}/.cache"
+	export XDG_CONFIG_HOME="${HOME}/.config"
+fi
 export XDG_DATA_HOME="${HOME}/.local/share"
+
+if [[ -z "${XDG_RUNTIME_DIR}" ]]; then
+	export XDG_RUNTIME_DIR="${TMPDIR}"
+fi
 
 export PATH="${PATH}:/sbin"
 export PATH="${PATH}:/usr/local/sbin"
@@ -52,7 +61,7 @@ export PATH="${PATH}:${HOME}/.local/bin"
 export PATH="${PATH}:/usr/local/go/bin"
 export PATH="${PATH}:${GOBIN}"
 
-export HISTFILE="${XDG_CACHE_HOME}/.bash_history"
+export HISTFILE="${XDG_CACHE_HOME}/bash/.bash_history"
 if [ ! -z "${ITERM_SESSION_ID}" ]; then
 	HISTFILE="${HISTFILE}_${ITERM_SESSION_ID%:*}"
 fi
